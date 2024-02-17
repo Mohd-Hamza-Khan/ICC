@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Filter</title>
+{% endblock title %}
+
+{% block style %}
+<style>
+    .overlay {
+        position: absolute;
+        top: 207px;
+        left: 80px;
+        width: 240px;
+        height: 356px;
+        background-color: #4F2D66;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .overlay2 {
+        position: absolute;
+        top: 104px;
+        bottom: 70px;
+        right: 281px;
+        width: 750px;
+        height: 556px;
+        background-color: #4F2D66;
+        border-radius: 16px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .overlay3 {
+        position: absolute;
+        top: 122px;
+        bottom: 66px;
+        right: 293px;
+        width: 724px;
+        height: 503px;
+        background-color: white;
+        border-radius: 20px;
+        overflow-y: auto;
+    }
+
+    .overlay3 table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .overlay3 table,
+    .overlay3 th,
+    .overlay3 td {
+        border: 1px solid #4F2D66;
+    }
+
+    .overlay3 th,
+    .overlay3 td {
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+
+{% endblock style %}
+
+{% block body %}
+
+<h1 style="left;50">Filter An Entry Here</h1>
+<div class="overlay d-flex align-items-center">
+  <center>
+    <form action="/select" method="post" style="background-color: #4F2D66; padding: 20px; border-radius: 10px;">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="enrollment_no" class="form-label" style="color: white;">Enrollment Number</label>
+        <input type="number" class="form-control" id="enrollment_no" name="enrollment_no" value="{{enrollment_no}}" style="border-radius: 8px;" required>
+      </div>
+      <div class="mb-3">
+        <label for="dept" class="form-label" style="color: white;">Department</label>
+        <select class="form-select" type="text" id="dept" name="dept" value="{{dept}}" style="border-radius: 8px; background-color: white; color: #4F2D66;">
+          <option >Btech</option>
+          <option >BBA</option>
+          <option >BCA</option>
+          <option >MBBS</option>
+          
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="year" class="form-label" style="color: white;">Year</label>
+        <select class="form-select" id="year" name="year" value="{{year}}" style="border-radius: 8px; background-color: white; color:#4F2D66;">
+          <option >1</option>
+          <option >2</option>
+          <option >3</option>
+          <option >4</option>
+        </select>
+      </div>
+      <div>
+      <label for="purpose" class="form-label" style="color: white;">purpose</label>
+        <select class="form-select" id="purpose" name="purpose" value="{{purpose}}" style="border-radius: 8px; background-color: white; color:#4F2D66;">
+          <option >Study</option>
+          <option >Class</option>
+        </select>
+      </div>
+      <button type="submit"
+        class="button button-block button-secondary"
+        style="width: 207px;margin:0.5rem;background-color:rgb(230, 220, 220); border-color: #4F2D66; color: #4F2D66;">search</button>
+
+    </form>
+  </center>
+</div>
+
+<style>
+  .overlay2 {
+      position: absolute;
+      top: 104px;
+      bottom: 70px;
+      right: 281px;
+      width: 750px;
+      height: 556px;
+      background-color: #4F2D66;
+      border-radius: 16px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .overlay3 {
+      position: absolute;
+      top: 122px;
+      bottom: 66px;
+      right: 293px;
+      width: 724px;
+      height: 503px;
+      background-color: white;
+      border-radius: 20px;
+      overflow-y: auto;
+  }
+
+  .overlay3 table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  .overlay3 table,
+  .overlay3 th,
+  .overlay3 td {
+      border: 1px solid #4F2D66;
+  }
+
+  .overlay3 th,
+  .overlay3 td {
+      padding: 10px;
+      text-align: center;
+  }
+</style>
+
+<body>
+  <!-- Additional Overlay -->
+<div class="overlay2 d-flex align-items-center">
+  <!-- Additional content here -->
+</div>
+  <div class="overlay3" style="text-align-last: center;">
+    <h2>Current Lab Users</h2>
+    <table class="table" id="labTable">
+      <thead>
+        <tr>
+          <th>S.No.</th>
+          <th>Enrollment Number</th>
+          <th>Department</th>
+          <th>Year</th>
+          <th>Purpose</th>
+          <th>Entry time</th>
+          <th>Exit</th>
+        </tr>
+      </thead>
+      {% for stud in studs %}
+      <tbody>
+        <tr>
+          <th>{{forloop.counter}}</th>
+          <td>{{stud.enrollment_no}}</td>
+          <td>{{stud.dept}}</td>
+          <td>{{stud.year}}</td>
+          <td>{{stud.purpose}}</td>
+          <td>{{stud.entry}}</td>
+          <td>Exit</a></td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+</body>
+
+
+
+{% endblock body %}
